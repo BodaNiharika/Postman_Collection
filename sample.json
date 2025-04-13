@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "80e2c98d-030e-4109-a7dc-01983ed36f30",
+		"name": "Sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40748213"
+	},
+	"item": [
+		{
+			"name": "Creating a user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"response = pm.response.json(); //fetching\r",
+							"id = response.id;//path\r",
+							"console.log(id);//printing\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting the details of ID 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"response = pm.response.json();\r",
+							"details = response.data;\r",
+							"console.log(details);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"response = pm.response.json();\r",
+							"place = response.place\r",
+							"console.log(place)\r",
+							"if(place==\"Amsterdam\"){\r",
+							"console.log(\"is edited\");\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\",\r\n    \"place\" : \"Amsterdam\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "ID",
+			"value": ""
+		}
+	]
+}
