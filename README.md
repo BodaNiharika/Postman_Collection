@@ -147,3 +147,52 @@ steps:
     PathtoPublish: 'reports'
     ArtifactName: 'NewmanReport'
   displayName: 'Publish Report'
+
+-----------
+Developer pushes code → Azure Repo
+            ↓
+trigger: main
+            ↓
+Pipeline starts
+            ↓
+Agent machine runs
+            ↓
+Install Node.js
+            ↓
+Install Newman
+            ↓
+Run Postman collection
+            ↓
+Generate HTML report
+            ↓
+Publish report artifact
+            ↓
+Pipeline finished
+----------------
+
+secret 
+
+trigger:
+- main
+
+pool:
+  name: Default
+
+variables:
+  baseUrl: 'https://dev.api.com'
+  username: 'testuser'
+  password: '$(password)'   # secret variable
+
+steps:
+
+- script: npm install -g newman
+  displayName: Install Newman
+
+- script: |
+    newman run collections/MyCollection.json ^
+    --env-var "baseUrl=$(baseUrl)" ^
+    --env-var "username=$(username)" ^
+    --env-var "password=$(password)"
+  displayName: Run Collection
+
+  
